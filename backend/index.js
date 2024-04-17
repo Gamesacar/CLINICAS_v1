@@ -10,14 +10,17 @@ dotenv.config();
 
 conectarDB();
 
-app.use('/doctores',doctorRoutes);
+app.use("/",doctorRoutes);  //aqui había un error la ruta estaba mal
 
+/*
 app.use ("/",(req,res)=>{
     res.send("mi app funciona en el servidor")
 });
+*/
 
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT,()=>{
     console.log(`Servidor shi en el puerto ${PORT}`)
 });
+
