@@ -10,8 +10,8 @@ dotenv.config();
 
 conectarDB();
 
-app.use("/",doctorRoutes);  //aqui había un error la ruta estaba mal
-
+app.use("/doctores",doctorRoutes);  //aqui había un error la ruta estaba mal
+app.use(express.json());
 /*
 app.use ("/",(req,res)=>{
     res.send("mi app funciona en el servidor")
