@@ -1,17 +1,17 @@
-import express from 'express';
-import {crearDoctor} from '../controllers/doctorControllers.js';
+import express from 'express'
 const router = express.Router();
-//import { cdoctores } from '../controllers/doctorControllers.js';
-//router.get("/", cdoctores);
-
-
-router.get("/doctores", (req, res)=>{
-    res.send("vista para doctores")
+import {cdoctores} from '../controllers/doctorControllers.js';
+import {crearDoctor} from '../controllers/doctorControllers.js';
+router.get("/",(req,res)=>{
+    res.send("vista doctores")
 });
 
-router.get("/logindoctores", (req, res)=>{
+router.get("/", cdoctores);
+
+router.get("/logindoctores",(req,res)=>{
     res.send("vista para el login de los doctores")
 });
 
-router.post("/nuevodoc", crearDoctor);
+router.post("/registrardoc", crearDoctor); // ruta para crear un nuevo doctor por el metodo post
+
 export default router;
