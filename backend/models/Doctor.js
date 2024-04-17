@@ -33,7 +33,7 @@ const doctorSchema = new mongoose.Schema({
     confirmado : {
         type: Boolean,
         default: false
-    },
+    }
 });
 
 const Doctor = mongoose.model('Doctor', doctorSchema);
