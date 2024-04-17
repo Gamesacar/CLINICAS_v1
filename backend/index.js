@@ -13,7 +13,7 @@ conectarDB();
 app.use(express.json());
 app.use("/doctores",doctorRoutes);  //aqui había un error la ruta estaba mal
 
-
+//
 
 
 

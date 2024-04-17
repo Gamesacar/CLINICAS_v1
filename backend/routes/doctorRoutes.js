@@ -15,3 +15,5 @@ router.get("/logindoctores",(req,res)=>{
 router.post("/registrardoc", crearDoctor); // ruta para crear un nuevo doctor por el metodo post
 
 export default router;
+
+//
