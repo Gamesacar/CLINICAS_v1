@@ -22,7 +22,7 @@ const doctorSchema = new mongoose.Schema({
         trim: true
     },
 
-    Celuar : {
+    Celular : {
         type: String,
         default: null,
         trim: true
