@@ -3,7 +3,7 @@ import Doctor from '../models/Doctor.js';
 const cdoctores = async (req, res) => {
     try {
       // Verificarmo si el usuario ya está registrado en la base de datos
-      const existingDoctor = await Doctor.findOne({ email: req.body.email });
+      const existingDoctor = await Doctor.findOne({ email });
       if (existingDoctor) {
         // Si el usuario ya existe, con esta funcion se envia un mensaje de error 400
         return res.status(400).json({ mensaje: 'El usuario ya está registrado en la base de datos' });
