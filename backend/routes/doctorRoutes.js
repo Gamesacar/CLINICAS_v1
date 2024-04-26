@@ -2,9 +2,18 @@ import express from 'express'
 const router = express.Router();
 import {cdoctores} from '../controllers/doctorControllers.js';
 import {crearDoctor} from '../controllers/doctorControllers.js';
-router.get("/",(req,res)=>{
-    res.send("vista doctores")
+import {registrar,perfil} from '../controllers/doctorControllers.js';
+
+
+
+router.get("/login",(req,res)=>{
+    res.send("desde la ruta /api/login")
+
 });
+
+router.post("/",registrar);
+router.get("/perfil",perfil);
+
 
 router.get("/", cdoctores);
 
