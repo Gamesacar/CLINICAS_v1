@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import bcrypt from "bcrypt";
 
 
-
 const doctorSchema = new mongoose.Schema({
 
     nombre: {
@@ -31,6 +30,8 @@ const doctorSchema = new mongoose.Schema({
 
     token : {
         type: String,
+        default: () => Math.random().toString(36).substring(2) // Genera un código alfanumérico aleatorio
+
     },
 
     confirmado : {
