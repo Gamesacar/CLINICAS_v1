@@ -58,8 +58,9 @@ doctorSchema.pre("save", async function(next) {
 const generarTokenNumerico = () => {
     const min = 100000; // Número mínimo de 6 dígitos
     const max = 999999; // Número máximo de 6 dígitos
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.round(Math.random() * (max - min) + min);
 }
+
 
 const Doctor = mongoose.model("Doctor", doctorSchema);
 export {
