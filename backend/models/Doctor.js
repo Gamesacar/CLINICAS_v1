@@ -30,8 +30,6 @@ const doctorSchema = new mongoose.Schema({
 
     token : {
         type: String,
-        default: () => Math.random().toString(36).substring(2) // Genera un código alfanumérico aleatorio
-
     },
 
     confirmado : {
@@ -53,12 +51,20 @@ doctorSchema.pre("save", async function(next) {
     const hashedPassword = await bcrypt.hash(doctor.password, 10);
     //remplazo la contra por el hash
     doctor.password = hashedPassword;
+    doctor.token = generarTokenNumerico()
     next();
 });
 
+const generarTokenNumerico = () => {
+    const min = 100000; // Número mínimo de 6 dígitos
+    const max = 999999; // Número máximo de 6 dígitos
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 const Doctor = mongoose.model("Doctor", doctorSchema);
 export {
 
     Doctor,doctorSchema
 }
+
+

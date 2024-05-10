@@ -10,6 +10,7 @@ const cdoctores = async (req, res) => {
       const existingDoctor = await Doctor.findOne({ email });
       const existingDoctor_pass = await Doctor.findOne({ password });
 
+
       if (existingDoctor && existingDoctor_pass) {
         // Si el usuario ya existe, con esta función se envía un mensaje de error 400
         return res.status(400).json({ mensaje: 'El usuario ya está registrado en la base de datos y las contraseñas coinciden' });
@@ -21,6 +22,7 @@ const cdoctores = async (req, res) => {
       await doctor.save(); 
   
       res.json({ mensaje: 'Registrando un nuevo doctor' });
+
     } catch (error) {
       console.error(error);
       res.status(500).json({ mensaje: 'Hubo un error' });
@@ -40,7 +42,8 @@ const perfil = (req, res)=> {
 
 const crearDoctor = async (req, res) => {
     try {
-        const {nombre, password, email, Celular, token, confirmado}=req.body;
+        const token = Math.random().toString(36).substring(2) // Genera un código alfanumérico aleatorio
+        const {nombre, password, email, Celular,confirmado}=req.body;
         const nuevoDoctor = new Doctor({
             nombre,
             password,
@@ -57,6 +60,8 @@ const crearDoctor = async (req, res) => {
         console.error("Error al crear un nuevo doctor:", error);
         res.status(500).json({ error: "Ocurrió un error al crear un nuevo doctor" });
     }
+
+
 };
 
 export {
