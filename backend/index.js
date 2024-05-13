@@ -3,6 +3,7 @@ import express from "express";
 import conectarDB from "./config/db.js";
 import dotenv from 'dotenv'
 import doctorRoutes from './routes/doctorRoutes.js'
+import pacientRoutes from './routes/pacientRoutes.js'
 
 const app = express()
 
@@ -12,6 +13,7 @@ conectarDB();
 
 app.use(express.json());
 app.use("/doctores",doctorRoutes);  //aqui había un error la ruta estaba mal
+app.use("/pacientes/",pacientRoutes);
 
 //
 

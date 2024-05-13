@@ -1,27 +1,27 @@
-import {Doctor} from '../models/Doctor.js';
+import {Pacient} from '../models/Pacient.js';
 
-const cdoctores = async (req, res) => {
+const cpacientes = async (req, res) => {
     try {
       // Verificarmo si el usuario ya está registrado en la base de datos
       console.log(req.body)
 
       const { email ,password} = req.body;
 
-      const existingDoctor = await Doctor.findOne({ email });
-      const existingDoctor_pass = await Doctor.findOne({ password });
+      const existingPacient = await Pacient.findOne({ email });
+      const existingPacient_pass = await Pacient.findOne({ password });
 
 
-      if (existingDoctor && existingDoctor_pass) {
+      if (existingPacient && existingPacient_pass) {
         // Si el usuario ya existe, con esta función se envía un mensaje de error 400
         return res.status(400).json({ mensaje: 'El usuario ya está registrado en la base de datos y las contraseñas coinciden' });
     }
  
     
       // Si el usuario no está registrado, creamos uno nuevo
-      const doctor = new Doctor(req.body); 
-      await doctor.save(); 
+      const pacient = new Pacient(req.body); 
+      await pacient.save(); 
   
-      res.json({ mensaje: 'Registrando un nuevo doctor' });
+      res.json({ mensaje: 'Registrando un nuevo Paciente' });
 
     } catch (error) {
       console.error(error);
@@ -31,11 +31,11 @@ const cdoctores = async (req, res) => {
   
 
 const login = (req, res)=> {
-    res.send({msg:"desde la ruta /api/doctores"})
+    res.send({msg:"desde la ruta /api/pacientes"})
 };
 
 const perfil = (req, res)=> {
-    res.json({msg:"desde la ruta /api/doctores/perfil"})
+    res.json({msg:"desde la ruta /api/pacientes/perfil"})
 };
 
 
@@ -43,7 +43,5 @@ const perfil = (req, res)=> {
 
 
 export {
-    cdoctores,login,perfil
+    cpacientes,login,perfil
 }
-
-//
