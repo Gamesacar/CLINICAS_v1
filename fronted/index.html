@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form login</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="log.css">
 </head>
-
 <body>
     <main>
         <div class="contenedor__todo">
@@ -25,34 +24,34 @@
                 </div>
             </div>
             <div class="contenedor__login-register">
-                <form action="/login" method="POST" class="formulario__login">
+                <form id="loginForm" class="formulario__login">
                     <h2>Iniciar Sesión</h2>
-                    <input type="text" placeholder="Usuario" name="usuario" required>
-                    <input type="password" placeholder="Contraseña" name="contra" required>
-                    <select name="rol" required>
+                    <input type="email" id="login-email" placeholder="Correo Electrónico" name="email" required>
+                    <input type="password" id="login-password" placeholder="Contraseña" name="password" required>
+                    <select id="login-role" name="role" required>
                         <option value="" disabled selected>Selecciona tu rol</option>
                         <option value="doctor">Doctor</option>
                         <option value="paciente">Paciente</option>
                     </select>
-                    <button>Entrar</button>
+                    <button type="submit">Entrar</button>
                 </form>
-                <form action="/register" method="POST" class="formulario__register">
+                <form id="registerForm" class="formulario__register">
                     <h2>Registrarse</h2>
-                    <input type="text" placeholder="Nombre Completo" name="nombre_completo" required>
-                    <input type="text" placeholder="Correo Electrónico" name="correo" required>
-                    <input type="text" placeholder="Telefono" name="usuario" required>
-                    <input type="password" placeholder="Contraseña" name="contra" required>
-                    <select name="rol" required>
+                    <input type="text" id="nombre" placeholder="Nombre Completo" name="nombre_completo" required>
+                    <input type="email" id="email" placeholder="Correo Electrónico" name="correo" required>
+                    <input type="text" id="celular" placeholder="Celular" name="usuario" required>
+                    <input type="password" id="password" placeholder="Contraseña" name="contra" required>
+                    <input type="password" id="confirm-password" placeholder="Confirmar Contraseña" name="confirmar_contra" required>
+                    <select id="role" name="role" required>
                         <option value="" disabled selected>Selecciona tu rol</option>
                         <option value="doctor">Doctor</option>
                         <option value="paciente">Paciente</option>
                     </select>
-                    <button>Registrarse</button>
+                    <button type="submit">Registrarse</button>
                 </form>
             </div>
         </div>
     </main>
     <script src="script.js"></script>
 </body>
-
 </html>

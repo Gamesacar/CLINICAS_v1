@@ -61,3 +61,62 @@ function register (){
         caja_trasera_login.style.opacity = "1" ;
     }
 }
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const registerForm = document.getElementById('registerForm');
+    const loginForm = document.getElementById('loginForm');
+
+    registerForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        const celular = document.getElementById('celular').value;
+        const role = document.getElementById('role').value;
+
+        if (password !== confirmPassword) {
+            alert('Las contraseñas no coinciden');
+            return;
+        }
+
+        const data = { nombre, email, password, celular };
+
+        try {
+            let response;
+            if (role === 'doctor') {
+                response = await axios.post('http://localhost:4000/doctores/registrardoc', data);
+            } else {
+                response = await axios.post('http://localhost:4000/pacientes/registrarpaci', data);
+            }
+            alert(response.data.mensaje || 'Registro exitoso');
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Hubo un error al registrar');
+        }
+    });
+
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        const role = document.getElementById('login-role').value;
+
+        const data = { email, password };
+
+        try {
+            let response;
+            if (role === 'doctor') {
+                response = await axios.post('http://localhost:4000/doctores/login', data);
+            } else {
+                response = await axios.post('http://localhost:4000/pacientes/login', data);
+            }
+            alert(response.data.mensaje || 'Login exitoso');
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Hubo un error al iniciar sesión');
+        }
+    });
+});
