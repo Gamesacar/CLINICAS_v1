@@ -1,4 +1,6 @@
 import {Doctor} from '../models/Doctor.js';
+import bcrypt from 'bcrypt';
+
 
 const cdoctores = async (req, res) => {
     try {
@@ -30,8 +32,29 @@ const cdoctores = async (req, res) => {
   };
   
 
-const login = (req, res)=> {
-    res.send({msg:"desde la ruta /api/doctores"})
+const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Buscar el doctor por correo electrónico
+        const doctor = await Doctor.findOne({ email });
+
+        if (!doctor) {
+            return res.status(400).json({ mensaje: 'El doctor no existe xd' });
+        }
+
+        // Verificar la contraseña
+        const passwordMatch = await bcrypt.compare(password, doctor.password);
+
+        if (!passwordMatch) {
+            return res.status(400).json({ mensaje: 'Contraseña incorrecta' });
+        }
+
+        res.json({ mensaje: 'Inicio de sesión exitoso', nombre: doctor.nombre });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ mensaje: 'Hubo un error al iniciar sesión' });
+    }
 };
 
 const perfil = (req, res)=> {

@@ -1,4 +1,6 @@
 import {Pacient} from '../models/Pacient.js';
+import bcrypt from 'bcrypt';
+
 
 const cpacientes = async (req, res) => {
     try {
@@ -30,9 +32,31 @@ const cpacientes = async (req, res) => {
   };
   
 
-const login = (req, res)=> {
-    res.send({msg:"desde la ruta /api/pacientes"})
+const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+      // Buscar el paciente por correo electrónico
+      const paciente = await Pacient.findOne({ email });
+
+      if (!paciente) {
+          return res.status(400).json({ mensaje: 'El paciente no existe' });
+      }
+
+      // Verificar la contraseña
+      const passwordMatch = await bcrypt.compare(password, paciente.password);
+
+      if (!passwordMatch) {
+          return res.status(400).json({ mensaje: 'Contraseña incorrecta' });
+      }
+
+      res.json({ mensaje: 'Inicio de sesión exitoso', nombre: paciente.nombre });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ mensaje: 'Hubo un error al iniciar sesión' });
+  }
 };
+
 
 const perfil = (req, res)=> {
     res.json({msg:"desde la ruta /api/pacientes/perfil"})
